@@ -342,6 +342,7 @@ def get_flex_message():
     resp.headers['Response-Type'] = "object"
     return resp
 
+
 @app.route('/sticker')
 def get_sticker():
     data = {
@@ -351,6 +352,84 @@ def get_sticker():
                 "packageId": "11537",
                 "stickerId": "52002734"
             }
+        ]
+    }
+
+    js = json.dumps(data)
+    resp = Response(js, status=200, mimetype='application/json')
+    resp.headers['Response-Type'] = "object"
+    return resp
+
+
+@app.route('/quick-reply-action')
+def get_quick_reply():
+    data = {
+        "line_payload": [
+            {
+                "type": "text",
+                "text": "โปรดเลือกรูปภาพจากแกลอรี่ของคุณค่ะ ✅ รูปภาพควรเป็นรูปที่ได้จาก Promax นะคะ✅ ",
+                "quickReply": {
+                    "items": [
+                        # {
+                        #     "type": "action",
+                        #     "imageUrl": "https://example.com/sushi.png",
+                        #     "action": {
+                        #         "type": "message",
+                        #         "label": "Sushi",
+                        #         "text": "Sushi"
+                        #     }
+                        # },
+                        # {
+                        #     "type": "action",
+                        #     "imageUrl": "https://example.com/sushi.png",
+                        #     "action": {
+                        #         "type": "postback",
+                        #         "label": "postback",
+                        #         "data": "action=buy&itemid=111",
+                        #         "text": "Buy"
+                        #     }
+                        # },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "camera",
+                                "label": "Camera"
+                            }
+                        },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "cameraRoll",
+                                "label": "cameraRoll"
+                            }
+                        },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "location",
+                                "label": "Send location"
+                            }
+                        },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "uri",
+                                "label": "Phone order",
+                                "uri": "tel:09001234567"
+                            }
+                        },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "uri",
+                                "label": "Recommend to friends",
+                                "uri": "https://line.me/R/nv/recommendOA/@linedevelopers"
+                            }
+                        }
+                    ]
+                }
+            }
+
         ]
     }
 
